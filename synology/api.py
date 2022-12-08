@@ -31,6 +31,10 @@ BASE_API_INFO = {
         'name': 'SYNO.SurveillanceStation.SnapShot',
         'version': 1
     },
+    'recording': {
+        'name': 'SYNO.SurveillanceStation.Recording',
+        'version': 6
+    },
 }
 
 API_NAMES = [api['name'] for api in BASE_API_INFO.values()]
