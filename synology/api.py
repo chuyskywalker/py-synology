@@ -1,6 +1,5 @@
 """Python Synology SurveillanceStation API wrapper."""
 import urllib
-
 import requests
 
 
@@ -341,9 +340,7 @@ class Api:
         })
 
     def _get(self, url, payload):
-        response = requests.get(url, payload, timeout=self._timeout,
-                                verify=self._verify_ssl)
-
+        response = requests.get(url, payload, timeout=self._timeout, verify=self._verify_ssl)
         response.raise_for_status()
         return response
 
