@@ -235,8 +235,6 @@ class Api:
             'version': 9,
             'idList': camera_id,
         }, **kwargs)
-        print(api['url'])
-        print(payload)
         response = self._get(api['url'], payload)
 
         return response['success']
@@ -294,7 +292,6 @@ class Api:
             'toTime': to_time,
             'fileName': "video",
         }, **kwargs)
-        print(api, payload)
         response = self._get_json_with_retry(api['url'], payload)
 
         return response['data']['dlid']
