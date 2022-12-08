@@ -19,10 +19,10 @@ BASE_API_INFO = {
         'name': 'SYNO.SurveillanceStation.Camera.Event',
         'version': 1
     },
-    'video_stream': {
-        'name': 'SYNO.SurveillanceStation.VideoStream',
-        'version': 1
-    },
+    # 'video_stream': {
+    #     'name': 'SYNO.SurveillanceStation.VideoStream',
+    #     'version': 1
+    # },
     'home_mode': {
         'name': 'SYNO.SurveillanceStation.HomeMode',
         'version': 1
