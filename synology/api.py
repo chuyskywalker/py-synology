@@ -9,7 +9,7 @@ ERROR_CODE_SESSION_EXPIRED = 105
 BASE_API_INFO = {
     'auth': {
         'name': 'SYNO.API.Auth',
-        'version': 2
+        'version': 3
     },
     'camera': {
         'name': 'SYNO.SurveillanceStation.Camera',
