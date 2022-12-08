@@ -384,7 +384,8 @@ class Camera:
         self._name = data['name']
         self._is_enabled = data['enabled']
         self._recording_status = data['recStatus']
-        self._video_stream_url = video_stream_url_provider(self.camera_id)
+        # this was disabled in later versions of the DSM/SurveillanceStation
+        self._video_stream_url = None  # video_stream_url_provider(self.camera_id)
 
     @property
     def camera_id(self):
