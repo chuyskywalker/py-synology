@@ -92,7 +92,7 @@ class Api:
         api = self._api_info['auth']
         payload = dict({
             'api': api['name'],
-            'method': 'Login',
+            'method': 'login',
             'version': api['version'],
             'account': self._username,
             'passwd': self._password,
