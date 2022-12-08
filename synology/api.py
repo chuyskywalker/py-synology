@@ -277,7 +277,51 @@ class Api:
         }, **kwargs)
         response = self._get_json_with_retry(api['url'], payload)
 
-        return response['data']['camId']
+    def range_export(self, camera_id, from_time, to_time, **kwargs):
+        """Begin a range export for the given camera. Check the GetRangeExportProgress to process it"""
+        api = self._api_info['recording']
+        payload = dict({
+            '_sid': self._sid,
+            'api': api['name'],
+            'method': 'RangeExport',
+            'version': api['version'],
+            'camId': camera_id,
+            'fromTime': from_time,
+            'toTime': to_time,
+            'fileName': "video",
+        }, **kwargs)
+        print(api, payload)
+        response = self._get_json_with_retry(api['url'], payload)
+
+        return response['data']['dlid']
+
+    def get_range_export_progress(self, dlid, **kwargs):
+        """Fetch export progress"""
+        api = self._api_info['recording']
+        payload = dict({
+            '_sid': self._sid,
+            'api': api['name'],
+            'method': 'GetRangeExportProgress',
+            'version': api['version'],
+            'dlid': dlid,
+        }, **kwargs)
+        response = self._get_json_with_retry(api['url'], payload)
+
+        return response['data']['progress'], response['data']['fileExt']
+
+    def on_range_export_done(self, dlid, **kwargs):
+        """Fetch export data"""
+        api = self._api_info['recording']
+        payload = dict({
+            '_sid': self._sid,
+            'api': api['name'],
+            'method': 'OnRangeExportDone',
+            'version': api['version'],
+            'dlid': dlid,
+        }, **kwargs)
+        response = self._get(api['url'], payload)
+        return response.content
+
 
     def _video_stream_url(self, camera_id, video_format='mjpeg'):
         api = self._api_info['video_stream']
