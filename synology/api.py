@@ -5,6 +5,7 @@ import requests
 
 
 ERROR_CODE_SESSION_EXPIRED = 105
+ERROR_CODE_TOO_SOON = 550  # issued when attempting to get at a recording before it is ready
 
 BASE_API_INFO = {
     'auth': {
@@ -358,10 +359,16 @@ class Api:
         content = response.json()
 
         if 'success' not in content or content['success'] is False:
-            error_code = content.get('error', {}).get('code')
+            error_code = content.get('error', {}).get('code', None)
 
             if ERROR_CODE_SESSION_EXPIRED == error_code:
                 raise SessionExpiredException('Session expired')
+
+            if ERROR_CODE_TOO_SOON == error_code:
+                raise VideoNotReady('Session expired')
+
+            if error_code is not None:
+                raise ValueError(f'Error code {error_code}', content)
 
             raise ValueError('Invalid or failed response', content)
 
@@ -426,3 +433,7 @@ class MotionSetting:
 
 class SessionExpiredException(Exception):
     """An error indicating session expired."""
+
+
+class VideoNotReady(Exception):
+    """An error indicating the desired timeslice of video is not ready."""
