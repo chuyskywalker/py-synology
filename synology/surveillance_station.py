@@ -1,5 +1,5 @@
 """Python Synology SurveillanceStation wrapper."""
-from synology.api import (
+from py_synology.synology.api import (
     Api, MOTION_DETECTION_SOURCE_BY_SURVEILLANCE,
     MOTION_DETECTION_SOURCE_DISABLED,
     HOME_MODE_ON, HOME_MODE_OFF)
@@ -83,3 +83,12 @@ class SurveillanceStation:
     def get_home_mode_status(self):
         """Get the state of Home Mode"""
         return self._api.home_mode_status()
+
+    def range_export(self, camera_id, from_time, to_time):
+        return self._api.range_export(camera_id, from_time, to_time)
+
+    def range_export_progress(self, dlid):
+        return self._api.get_range_export_progress(dlid)
+
+    def range_export_save(self, dlid):
+        return self._api.on_range_export_done(dlid)
